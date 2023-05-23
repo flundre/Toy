@@ -8,12 +8,13 @@ namespace Toy
 {
     class Player
     {
-        string Name { get; set; }
-        int Score { get; set; }
-        public Player(string n, int s)
+        public string Name { get; set; }
+        public int Score { get; set; }
+        public string Difficulty { get; set; }
+        public DateTime time { get; set; }
+        public Player(string n)
         {
             Name = n;
-            Score = s;
         }
     }
 }

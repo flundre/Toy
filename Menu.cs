@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,22 +39,22 @@ namespace Toy
             Hide();
             if(diff == "Easy")
             {
-                Game game = new Game(NameInputBox.Text, 2000);
+                Game game = new Game(NameInputBox.Text, 2000, diff);
                 game.Show();
             }
             else if(diff == "Medium")
             {
-                Game game = new Game(NameInputBox.Text, 1000);
+                Game game = new Game(NameInputBox.Text, 1000, diff);
                 game.Show();
             }
             else if (diff == "Hard")
             {
-                Game game = new Game(NameInputBox.Text, 800);
+                Game game = new Game(NameInputBox.Text, 800, diff);
                 game.Show();
             }
             else
             { // secret difficulty PRO
-                Game game = new Game(NameInputBox.Text, 600);
+                Game game = new Game(NameInputBox.Text, 600, "PRO");
                 game.Show();
             }
             
@@ -66,6 +67,12 @@ namespace Toy
         private void NameInputBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void StatsButton_Click(object sender, EventArgs e)
+        {
+            string text = File.ReadAllText("../../Resources/stats.txt");
+            MessageBox.Show(text, "Stats", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
     }
 }

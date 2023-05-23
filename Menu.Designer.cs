@@ -35,6 +35,7 @@ namespace Toy
             this.NameLabel = new System.Windows.Forms.Label();
             this.DiffLabel = new System.Windows.Forms.Label();
             this.DifficultyComboBox = new System.Windows.Forms.ComboBox();
+            this.StatsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // StartButton
@@ -102,6 +103,17 @@ namespace Toy
             this.DifficultyComboBox.TabIndex = 6;
             this.DifficultyComboBox.SelectionChangeCommitted += new System.EventHandler(this.DifficultyComboBox_SelectionChangeCommitted);
             // 
+            // StatsButton
+            // 
+            this.StatsButton.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.StatsButton.Location = new System.Drawing.Point(424, 17);
+            this.StatsButton.Name = "StatsButton";
+            this.StatsButton.Size = new System.Drawing.Size(169, 80);
+            this.StatsButton.TabIndex = 7;
+            this.StatsButton.Text = "Stats";
+            this.StatsButton.UseVisualStyleBackColor = true;
+            this.StatsButton.Click += new System.EventHandler(this.StatsButton_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -110,6 +122,7 @@ namespace Toy
             this.BackColor = System.Drawing.Color.DimGray;
             this.CancelButton = this.CloseButton;
             this.ClientSize = new System.Drawing.Size(605, 294);
+            this.Controls.Add(this.StatsButton);
             this.Controls.Add(this.DifficultyComboBox);
             this.Controls.Add(this.DiffLabel);
             this.Controls.Add(this.NameLabel);
@@ -135,5 +148,6 @@ namespace Toy
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.Label DiffLabel;
         private System.Windows.Forms.ComboBox DifficultyComboBox;
+        private System.Windows.Forms.Button StatsButton;
     }
 }

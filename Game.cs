@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace Toy
 {
@@ -14,29 +16,36 @@ namespace Toy
     {
         int score = 0;
         uint ticks = 0;
-        string name;
         int diff;
+        Player player;
         public Game()
         {
             InitializeComponent();
         }
-        public Game(string n, int d)
+        public Game(string n, int d, string dd)
         {
             InitializeComponent();
-            name = n;
             diff = d;
+            player = new Player(n);
+            player.Difficulty = dd;
         }
 
         private void Game_FormClosing(object sender, FormClosingEventArgs e)
         {
             Menu menu = new Menu();
+            using (StreamWriter writer = new StreamWriter("../../Resources/stats.txt", true))
+            {
+                writer.WriteLine($"{player.Name} {score} {player.Difficulty} {DateTime.Now}");
+            }
             menu.Show();
+            
+
         }
 
         private void BallTimer_Tick(object sender, EventArgs e)
         {
             ticks += 1;
-            if (ticks == 3)
+            if (ticks >= 3)
             {
                 Close();
             }
@@ -52,9 +61,12 @@ namespace Toy
 
         private void Game_Click(object sender, EventArgs e)
         {
+            SoundPlayer sound;
+            sound = new SoundPlayer("../../Resources/hit.wav");
+            sound.Play();
             ticks += 1;
             score -= 1;
-            if (ticks == 3)
+            if (ticks >= 3)
             {
                 Close();
             }
@@ -128,6 +140,9 @@ namespace Toy
         }
         private void RedBallBox_Click(object sender, EventArgs e)
         {
+            SoundPlayer sound;
+            sound = new SoundPlayer("../../Resources/hit.wav");
+            sound.Play();
             GenerateBall();
             score += 10;
             Score.Text = $"Score {score}";
@@ -137,9 +152,16 @@ namespace Toy
 
         private void GreenBallBox_Click(object sender, EventArgs e)
         {
+            SoundPlayer sound;
+            sound = new SoundPlayer("../../Resources/hit.wav");
+            sound.Play();
             GenerateBall();
             score += -20;
             ticks += 2;
+            if (ticks >= 3)
+            {
+                Close();
+            }
             Score.Text = $"Score {score}";
             BallTimer.Enabled = false;
             BallTimer.Enabled = true;
@@ -147,6 +169,9 @@ namespace Toy
 
         private void YellowBallBox_Click(object sender, EventArgs e)
         {
+            SoundPlayer sound;
+            sound = new SoundPlayer("../../Resources/hit.wav");
+            sound.Play();
             GenerateBall();
             score += 5;
             Score.Text = $"Score {score}";
@@ -156,6 +181,9 @@ namespace Toy
 
         private void BlueBallBox_Click(object sender, EventArgs e)
         {
+            SoundPlayer sound;
+            sound = new SoundPlayer("../../Resources/hit.wav");
+            sound.Play();
             GenerateBall();
             score += 0;
             Score.Text = $"Score {score}";
